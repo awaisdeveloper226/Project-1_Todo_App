@@ -2,21 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
-  color: var(--foreground);
-  background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -24,4 +10,208 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 240 5.9% 10%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 240 10% 3.9%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem;
+  }
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 5.9% 10%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+/* Global task list container */
+.task-list {
+  max-width: 600px;
+  margin: 30px auto;
+  padding: 20px 20px 50px 20px; /* Add more padding at the bottom for space */
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  font-family: "Roboto", sans-serif;
+  color: #333;
+  position: relative; /* To position the button within the container */
+  transition: all 0.3s ease;
+}
+
+/* Add subtle hover animation to task list container */
+.task-list:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+/* Add Task Button at the Top */
+.add-button {
+  padding: 10px 18px;
+  background: linear-gradient(145deg, #2980b9, #3498db);
+  color: white;
+  font-size: 14px;
+  width: 100%;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  min-width: 80px;
+  position: absolute;
+  top: 20px; /* Fixed position at the top */
+  left: 0;
+  right: 0;
+  z-index: 10; /* Ensure the button stays on top of the tasks */
+}
+
+/* Hover effect for add task button */
+.add-button:hover {
+  background: linear-gradient(145deg, #3498db, #2980b9);
+  transform: translateY(-2px);
+  box-shadow: 0 3px 8px rgba(52, 152, 219, 0.2);
+}
+
+.add-button:active {
+  transform: translateY(0);
+}
+
+/* Container for individual tasks, allows scrolling if needed */
+.task-container {
+  margin-top: 60px; /* Space for the button */
+  max-height: 400px; /* Set a max height to make task container scrollable */
+  overflow-y: auto; /* Allow scrolling if tasks exceed container size */
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-right: 10px; /* To prevent overflow if there's a scrollbar */
+}
+
+/* Individual task item styling */
+.task-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 18px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, background-color 0.3s ease,
+    box-shadow 0.3s ease;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+/* Hover effect for task items */
+.task-item:hover {
+  background-color: #f1f1f1;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Task name styling */
+.task-item span {
+  flex-grow: 1;
+  font-size: 14px;
+  font-weight: 400;
+  color: #333;
+  transition: color 0.3s ease;
+}
+
+/* Completed task style */
+.completed {
+  text-decoration: line-through;
+  color: #888;
+}
+
+/* Styling for task checkbox */
+.task-item input[type="checkbox"] {
+  margin-right: 15px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  background-color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Checked state for task checkbox */
+.task-item input[type="checkbox"]:checked {
+  background-color: #2ecc71;
+  border-color: #2ecc71;
+  box-shadow: 0 0 8px rgba(46, 204, 113, 0.5);
+}
+
+/* Remove button styling */
+.remove-button {
+  padding: 6px 12px;
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+  color: white;
+  font-size: 13px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+  min-width: 70px;
+  text-align: center;
+}
+
+/* Hover and active states for remove button */
+.remove-button:hover {
+  background: linear-gradient(135deg, #c0392b, #e74c3c);
+  transform: translateY(-2px);
+}
+
+.remove-button:active {
+  transform: translateY(0);
 }
